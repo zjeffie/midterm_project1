@@ -1,0 +1,5 @@
+"2","r error 4 (Error in eval(ele) : object 'params' not found
+)"
+"0","f75<-read.csv(""data"",""f75_interim.cvs"")"
+"2","Error in file(file, ""rt"") : cannot open the connection
+"
