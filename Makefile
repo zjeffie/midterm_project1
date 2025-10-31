@@ -1,8 +1,8 @@
-report.html: report.Rmd code/f75_code2_render.R analysis
+report.html: report.Rmd code/f75_code2_render.R .analysis
 	Rscript code/f75_code2_render.R
 
-analysis:
-	Rscript code/f77_code1.R
+.analysis:
+	Rscript code/f75_code1.R
 
 .PHONY: clean
 clean:
