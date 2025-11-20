@@ -1,16 +1,18 @@
 ###############################################
 # Child MUAC Recovery Analysis Script
-# Author: jie zhao
+# Author: Jie Zhao
 ###############################################
 
 library(dplyr)
 library(ggplot2)
 library(readr)
+library(here)
 
 #===============================
-# 1. Load data from Data/
+# 1. Load data from data/
 #===============================
-df <- read.csv(here::here("data", "f75_interim.csv"))
+df <- read_csv(here("data", "f75_interim.csv"))
+
 #===============================
 # 2. Age group categorization
 #===============================
@@ -37,16 +39,17 @@ summary_stats <- df %>%
   group_by(age_group) %>%
   summarise(
     n = n(),
-    mean_change = mean(muac_change_pct, na.rm = TRUE),
+    mean_change   = mean(muac_change_pct, na.rm = TRUE),
     median_change = median(muac_change_pct, na.rm = TRUE),
-    sd_change = sd(muac_change_pct, na.rm = TRUE)
+    sd_change     = sd(muac_change_pct, na.rm = TRUE),
+    .groups = "drop"
   )
 
-# save to Output/
-write_csv(summary_stats, "../Output/muac_summary_stats.csv")
+# save to output/
+write_csv(summary_stats, here("output", "muac_summary_stats.csv"))
 
 #===============================
-# 5. Visualization—boxplot
+# 5. Visualization — boxplot
 #===============================
 p <- ggplot(df, aes(x = age_group, y = muac_change_pct)) +
   geom_boxplot(fill = "#6baed6", alpha = 0.7) +
@@ -57,4 +60,10 @@ p <- ggplot(df, aes(x = age_group, y = muac_change_pct)) +
   ) +
   theme_minimal()
 
-ggsave("../Output/muac_recovery_boxplot.png", p, width = 8, height = 5)
+ggsave(
+  filename = here("output", "muac_recovery_boxplot.png"),
+  plot = p,
+  width = 8,
+  height = 5
+)
+
