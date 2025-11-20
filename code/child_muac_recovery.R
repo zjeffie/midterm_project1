@@ -10,8 +10,7 @@ library(readr)
 #===============================
 # 1. Load data from Data/
 #===============================
-df <- read_csv("../Data/f75_interim.csv")
-
+df <- read.csv(here::here("data", "f75_interim.csv"))
 #===============================
 # 2. Age group categorization
 #===============================
